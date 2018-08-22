@@ -6,6 +6,7 @@ public class TreeNode<E>
     protected E data;
     protected TreeNode<E> myRoot;  // needed to test for certain error
 
+    // 4 parameter constructor
     public TreeNode(E dat, TreeNode<E> sib, TreeNode<E> child, TreeNode<E> prev)
     {
         firstChild = child;
@@ -15,11 +16,13 @@ public class TreeNode<E>
         myRoot = null;
     }
 
+    // default constructor
     public TreeNode()
     {
         this(null, null, null, null);
     }
 
+    // accessor
     public E getData() {return data;}
 
     // for use only by Tree (default access)
@@ -31,7 +34,7 @@ public class TreeNode<E>
     }
 }
 
-// traverser interface ---------------------------------------------------------
+// traverser interface -------------------------------------------------------------------
 interface Traverser<E>
 {
     public void visit(E x);
