@@ -172,4 +172,49 @@ public class GenericTree<E> implements Cloneable
         setMyRoots(treeNode.firstChild);
     }
 
+
+    // define this as a static member so recursive display() does not need
+    // a local version
+    final static String blankString = "                                    ";
+
+    // let be public so client can call on subtree
+    public void  display(TreeNode<E> treeNode, int level)
+    {
+        String indent;
+
+        // stop runaway indentation/recursion
+        if  (level > (int)blankString.length() - 1)
+        {
+            System.out.println( blankString + " ... " );
+            return;
+        }
+
+        if (treeNode == null)
+            return;
+
+        indent = blankString.substring(0, level);
+
+        // pre-order processing done here ("visit")
+        System.out.println( indent + treeNode.data ) ;
+
+        // recursive step done here
+        display( treeNode.firstChild, level + 1 );
+        if (level > 0 )
+            display( treeNode.sib, level );
+    }
+
+    // often helper of typical public version, but also callable by on subtree
+    public <F extends Traverser<? super E>>
+    void traverse(F func, TreeNode<E> treeNode, int level)
+    {
+        if (treeNode == null)
+            return;
+
+        func.visit(treeNode.data);
+
+        // recursive step done here
+        traverse( func, treeNode.firstChild, level + 1);
+        if (level > 0 )
+            traverse( func,  treeNode.sib, level);
+    }
 }
