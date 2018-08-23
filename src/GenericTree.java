@@ -72,4 +72,21 @@ public class GenericTree<E> implements Cloneable
         return newNode;
     }
 
+    public TreeNode<E> find(TreeNode<E> root, E x, int level)
+    {
+        TreeNode<E> retval;
+
+        if (mSize == 0 || root == null)
+            return null;
+
+        if (root.data.equals(x))
+            return root;
+
+        // otherwise, recurse.  don't process sibs if this was the original call
+        if ( level > 0 && (retval = find(root.sib, x, level)) != null )
+            return retval;
+        return find(root.firstChild, x, ++level);
+    }
+
+
 }
