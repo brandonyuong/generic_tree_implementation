@@ -88,5 +88,24 @@ public class GenericTree<E> implements Cloneable
         return find(root.firstChild, x, ++level);
     }
 
+    public boolean remove(TreeNode<E> root, E x)
+    {
+        TreeNode<E> tn = null;
 
+        if (mSize == 0 || root == null)
+            return false;
+
+        if ( (tn = find(root, x, 0)) != null )
+        {
+            removeNode(tn);
+            mSize--;
+            return true;
+        }
+        return false;
+    }
+
+    private void removeNode(TreeNode<E> nodeToDelete )
+    {
+        
+    }
 }
